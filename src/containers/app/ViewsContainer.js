@@ -1,24 +1,12 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Card, CardHeader} from 'material-ui/Card'
-import Logo from '../../components/Logo'
-import EquipmentViewsContainer from '../equipment'
-import SettingsContainer from '../settings'
+import SearchViewContainer from '../search'
 
 
-const ViewsContainer = ({ tennantName, view }) => (
+const ViewsContainer = ({ view }) => (
   <div style={styles}>
-    {view[0] === 'equipment' &&
-      <EquipmentViewsContainer view={view.slice(1)} />
-    }
-    {view[0] === 'reserve' &&
-      <p>Reservations</p>
-    }
-    {view[0] === 'groups' &&
-      <p>Groups</p>
-    }
-    {view[0] === 'settings' &&
-      <SettingsContainer />
+    {view[0] === 'search' &&
+      <SearchViewContainer view={view.slice(1)} />
     }
   </div>
 )

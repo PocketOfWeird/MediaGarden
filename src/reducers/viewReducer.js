@@ -3,7 +3,7 @@ import { SET_CURRENT_VIEW, GO_BACKWARD, GO_FORWARD } from '../actions'
 
 const defaultState = {
   past: [],
-  current: ['equipment', 'search'],
+  current: ['search'],
   future: []
 }
 
