@@ -1,4 +1,6 @@
-
+export const setE = value => ({
+  target: { value }
+})
 
 
 export const defaultBarcodeState = {

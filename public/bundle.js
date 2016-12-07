@@ -58918,15 +58918,21 @@ var clearNote = exports.clearNote = function clearNote() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setSearch = exports.SET_SEARCH_TERM = undefined;
+exports.setSearch = exports.clearSearch = exports.SET_SEARCH_TERM = undefined;
 
 var _dataActions = require('./dataActions');
 
 var SET_SEARCH_TERM = exports.SET_SEARCH_TERM = 'SET_SEARCH_TERM';
 
+var clearSearch = exports.clearSearch = function clearSearch() {
+  return function (dispatch) {
+    return dispatch((0, _dataActions.clearData)());
+  };
+};
+
 var setSearch = exports.setSearch = function setSearch(e) {
   return function (dispatch) {
-    if (e.target.value === '') dispatch((0, _dataActions.clearData)());
+    if (e.target.value === '') dispatch(clearSearch());
     dispatch({ type: SET_SEARCH_TERM, payload: e.target.value });
     if (e.target.value.length > 2) {
       return dispatch((0, _dataActions.serverSearch)(e.target.value));
@@ -59337,7 +59343,8 @@ var Results = function Results(props) {
               {
                 key: index,
                 backgroundColor: _colors.yellowA400,
-                style: { margin: 1 }
+                style: { margin: 1 },
+                onTouchTap: props.handleKeyword(keyword)
               },
               keyword
             );
@@ -59351,7 +59358,8 @@ var Results = function Results(props) {
 Results.propTypes = {
   loading: _react.PropTypes.bool.isRequired,
   resultsList: _react.PropTypes.array.isRequired,
-  handleDownload: _react.PropTypes.func.isRequired
+  handleDownload: _react.PropTypes.func.isRequired,
+  handleKeyword: _react.PropTypes.func.isRequired
 };
 
 exports.default = Results;
@@ -59641,6 +59649,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
+var _actions = require('../../actions');
+
+var _helpers = require('../../helpers');
+
 var _Results = require('../../components/Results');
 
 var _Results2 = _interopRequireDefault(_Results);
@@ -59660,13 +59672,19 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return function (e) {
         return window.open(url, '_blank');
       };
+    },
+    handleKeyword: function handleKeyword(keyword) {
+      return function (e) {
+        dispatch((0, _actions.clearSearch)());
+        dispatch((0, _actions.setSearch)((0, _helpers.setE)(keyword)));
+      };
     }
   };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Results2.default);
 
-},{"../../components/Results":566,"react":497,"react-redux":458}],574:[function(require,module,exports){
+},{"../../actions":557,"../../components/Results":566,"../../helpers":583,"react":497,"react-redux":458}],574:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -59787,6 +59805,12 @@ exports.default = socket;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var setE = exports.setE = function setE(value) {
+  return {
+    target: { value: value }
+  };
+};
+
 var defaultBarcodeState = exports.defaultBarcodeState = {
   "checkedIn": true, "damaged": false, "missing": false
 };

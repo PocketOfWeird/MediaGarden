@@ -32,6 +32,7 @@ const Results = (props) => (
               key={index}
               backgroundColor={yellowA400}
               style={{margin: 1}}
+              onTouchTap={props.handleKeyword(keyword)}
             >
               {keyword}
             </Chip>
@@ -46,7 +47,8 @@ const Results = (props) => (
 Results.propTypes = {
   loading: PropTypes.bool.isRequired,
   resultsList: PropTypes.array.isRequired,
-  handleDownload: PropTypes.func.isRequired
+  handleDownload: PropTypes.func.isRequired,
+  handleKeyword: PropTypes.func.isRequired
 }
 
 export default Results
