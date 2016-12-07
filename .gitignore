@@ -38,3 +38,10 @@ jspm_packages
 
 # Config Files
 .config
+
+# DB Files
+server/db.json
+
+# Bundle Files
+public/bundle.js
+public/bundle.min.js

@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Categories from '../../components/Categories'
+import Results from '../../components/Results'
 
 
 const mapStateToProps = state => ({
-  categoriesObject: state.data.categories
+  loading: state.loading,
+  resultsList: state.data
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: id => e => console.log(id)
+  handleDownload: url => e => window.open(url,'_blank')
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Categories)
+)(Results)

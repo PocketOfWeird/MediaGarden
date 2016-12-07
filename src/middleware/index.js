@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import localStore from './local'
 import on from './on'
+import search from './search'
 import url from './url'
 import view from './view'
 
@@ -14,6 +15,7 @@ const configureMiddleware = () => {
     thunk,
     localStore,
     on,
+    search,
     url,
     view,
     logger

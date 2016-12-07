@@ -5,12 +5,10 @@ import AppTitleBar from '../../components/AppTitleBar'
 
 const mapStateToProps = state => ({
   title: 'Media Garden',
-  logged: isLoggedIn(state),
-  cartCount: 1
+  logged: isLoggedIn(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleCartTap: e => console.log('Cart tapped!'),
   handleAddTap: e => console.log('Add tapped!')
 })
 

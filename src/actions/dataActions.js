@@ -1,27 +1,25 @@
-export const FIREBASE_STATE = 'FIREBASE_STATE'
-export const FIREBASE_ONCE = 'FIREBASE_ONCE'
-export const FIREBASE_UPDATE = 'FIREBASE_UPDATE'
-export const UPDATE_COMPLETE = 'UPDATE_COMPLETE'
+import { raiseError } from './errorActions'
 
-export const firebaseState = state => ({
-  type: FIREBASE_STATE,
+
+export const SERVER_STATE = 'SERVER_STATE'
+export const SERVER_SEARCH = 'SERVER_SEARCH'
+export const CLEAR_DATA = 'CLEAR_DATA'
+
+export const serverState = state => ({
+  type: SERVER_STATE,
   payload: state
 })
 
-export const firebaseOnce = (path, data) => ({
-  type: FIREBASE_ONCE,
-  path,
-  data
-})
+export const serverSearch = searchTerm => {
+  if (typeof(searchTerm) !== 'string') {
+    return raiseError({message: 'Invalid Search term'})
+  }
+  return {
+    type: SERVER_SEARCH,
+    payload: searchTerm
+  }
+}
 
-export const firebaseUpdate = (path, values, note=null, data=null) => ({
-  type: FIREBASE_UPDATE,
-  path,
-  values,
-  note,
-  data
-})
-
-export const updateComplete = () => ({
-  type: UPDATE_COMPLETE
+export const clearData = () => ({
+  type: CLEAR_DATA
 })

@@ -1,26 +1,34 @@
 import React, { PropTypes } from 'react'
-import { Card, CardText } from 'material-ui/Card'
-import AutoComplete from 'material-ui/AutoComplete'
+import { Card, CardActions, CardText } from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
 
 
-const SearchBar = ({ dataSource, handleUpdateInput }) => (
+const SearchBar = (props) => (
   <Card>
     <CardText>
-      <AutoComplete
-          id='search'
-          type='search'
-          floatingLabelText='Search'
-          fullWidth={true}
-          dataSource={dataSource}
-          onUpdateInput={handleUpdateInput}
+      <TextField
+        floatingLabelText='Search'
+        fullWidth={true}
+        value={props.searchTerm}
+        onChange={props.handleChange}
       />
     </CardText>
+    {props.searchTerm &&
+      <CardActions>
+        <FlatButton
+          label='Clear Search'
+          onTouchTap={props.handleClear}
+        />
+      </CardActions>
+    }
   </Card>
 )
 
 SearchBar.propTypes = {
-  dataSource: PropTypes.array.isRequired,
-  handleUpdateInput: PropTypes.func.isRequired
+  searchTerm: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleClear: PropTypes.func.isRequired
 }
 
 export default SearchBar

@@ -6,15 +6,17 @@ import form from './formReducer'
 import loading from './loadingReducer'
 import note from './noteReducer'
 import view from './viewReducer'
+import searchTerm from './searchTermReducer'
 
 
 const rootReducer = combineReducers({
-  user,
   data,
   error,
   form,
   loading,
   note,
+  searchTerm,
+  user,
   view
 })
 
