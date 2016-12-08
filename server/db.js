@@ -9,7 +9,16 @@ const {
 mongoose.Promise = global.Promise
 mongoose.connect(settings.database)
 
-const _find = (query, socket) => Sound.find(query, andErrorOrResults(socket))
+const _find = (query, socket) => {
+  Sound
+  .find(query)
+  .limit(32)
+  .exec(andErrorOrResults(socket))
+}
+
+const _searchQuery = searchTerm => ({
+  $text: { $search: searchTerm.toLowerCase() }
+})
 
 const add = (obj, socket) => {
   var sound = new Sound(obj)
@@ -34,7 +43,7 @@ const update = (obj, socket) => {
 
 const search = (searchTerm, socket) => {
   if (isValidString(searchTerm, socket)) {
-    _find({$text: {$search: searchTerm.toLowerCase()}}, socket)
+    _find(_searchQuery(searchTerm), socket)
   }
 }
 
@@ -44,15 +53,19 @@ const lookup = (id, socket) => {
   }
 }
 
-const searchbyType = (type, socket) => {
+const searchbyType = (searchTerm, type, socket) => {
   if (isValidString(type, socket)) {
-    _find({type: type}, socket)
+    var query = _searchQuery(searchTerm)
+    query.type = type
+    _find(query, socket)
   }
 }
 
 const searchbyAuthor = (author, socket) => {
   if (isValidString(author, socket)) {
-    _find({author: author}, socket)
+    var query = _searchQuery(searchTerm)
+    query.author = author
+    _find(query, socket)
   }
 }
 
