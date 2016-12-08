@@ -60366,7 +60366,7 @@ var data = function data() {
 
   switch (action.type) {
     case _actions.SERVER_STATE:
-      return (0, _lodash2.default)([].concat(_toConsumableArray(state), _toConsumableArray(action.payload)), 'id');
+      return (0, _lodash2.default)([].concat(_toConsumableArray(state), _toConsumableArray(action.payload)), '_id');
     case _actions.CLEAR_DATA:
       return [];
     default:
