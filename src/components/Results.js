@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
+import map from 'lodash.map'
+import { yellowA400 } from 'material-ui/styles/colors'
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import Chip from 'material-ui/Chip'
-import { yellowA400 } from 'material-ui/styles/colors'
-import map from 'lodash.map'
+import Loader from './Loader'
+
 
 const Results = (props) => (
   <div>
@@ -40,6 +42,7 @@ const Results = (props) => (
         </CardText>
       </Card>
     )}
+    {props.loading && <Loader />}
   </div>
 )
 
