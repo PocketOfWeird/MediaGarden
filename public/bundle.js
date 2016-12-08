@@ -199,7 +199,8 @@ module.exports = secrets;
 'use strict';
 
 var settings = {
-  url: 'http://localhost'
+  url: 'http://localhost',
+  database: 'mongodb://localhost:27017/mediagarden'
 };
 
 module.exports = settings;
