@@ -53,7 +53,7 @@ const lookup = (id, socket) => {
   }
 }
 
-const searchbyType = (searchTerm, type, socket) => {
+const searchByType = (searchTerm, type, socket) => {
   if (isValidString(type, socket)) {
     var query = _searchQuery(searchTerm)
     query.type = type
@@ -61,7 +61,7 @@ const searchbyType = (searchTerm, type, socket) => {
   }
 }
 
-const searchbyAuthor = (author, socket) => {
+const searchByAuthor = (author, socket) => {
   if (isValidString(author, socket)) {
     var query = _searchQuery(searchTerm)
     query.author = author
@@ -75,6 +75,6 @@ module.exports = {
   update,
   search,
   lookup,
-  searchbyType,
-  searchbyAuthor
+  searchByType,
+  searchByAuthor
 }

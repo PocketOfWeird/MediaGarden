@@ -10,13 +10,17 @@ export const serverState = state => ({
   payload: state
 })
 
-export const serverSearch = searchTerm => {
+export const serverSearch = (
+  searchTerm, byType=false, type='', byAuthor=false, author=''
+) => {
   if (typeof(searchTerm) !== 'string') {
     return raiseError({message: 'Invalid Search term'})
   }
   return {
     type: SERVER_SEARCH,
-    payload: searchTerm
+    payload: searchTerm,
+    meta: byType ? { by: 'type', type: type} : false ||
+          byAuthor ? { by: 'author', author: author } : false
   }
 }
 

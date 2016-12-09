@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setSearch, clearSearch } from '../../actions'
+import { filterResults } from '../../selectors'
 import { setE } from '../../helpers'
 import Results from '../../components/Results'
 
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  resultsList: state.data
+  resultsList: filterResults(state)
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -7,6 +7,7 @@ import loading from './loadingReducer'
 import note from './noteReducer'
 import view from './viewReducer'
 import searchTerm from './searchTermReducer'
+import searchFilter from './searchFilterReducer'
 
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   loading,
   note,
   searchTerm,
+  searchFilter,
   user,
   view
 })

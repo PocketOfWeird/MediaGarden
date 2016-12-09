@@ -45,4 +45,10 @@ io.on('connection', socket => {
   socket.on('search', searchTerm => {
     db.search(searchTerm, socket)
   })
+  socket.on('searchByType', ({ searchTerm, type }) => {
+    db.searchByType(searchTerm, type, socket)
+  })
+  socket.on('searchbyAuthor', ({ searchTerm, author }) => {
+    db.searchbyAuthor(searchTerm, author, socket)
+  })
 })
