@@ -2,7 +2,7 @@ const ftls = require('./ftsl')
 const uniqBy = require('lodash.uniqby')
 const settings = require('../.config/settings')
 const {
-  isValidId, isValidString, errorOrResults, emmitState, emitError
+  isValidId, isValidString, emmitState, emitError
 } = require('./helpers')
 
 
@@ -58,6 +58,5 @@ module.exports = {
   add,
   remove,
   update,
-  search,
-  save
+  search
 }

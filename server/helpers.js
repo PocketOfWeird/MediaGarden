@@ -23,16 +23,9 @@ const isValidId = (id, socket) => {
   return emitError({ message:'Invalid document id'}, socket)
 }
 
-
-const errorOrResults = socket => (err, results) => {
-  if (err) return emitError(err, socket)
-  return emmitState(results, socket)
-}
-
 module.exports = {
   isValidId,
   isValidString,
-  errorOrResults,
   emmitState,
   emitError
 }
