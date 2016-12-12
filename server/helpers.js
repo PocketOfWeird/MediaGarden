@@ -1,7 +1,3 @@
-const isAscii = require('validator/lib/isAscii')
-const isMongoId =require('validator/lib/isMongoId')
-
-
 const emitError = (errObject, socket) => {
   socket.emit('error', errObject)
   return false
@@ -14,21 +10,21 @@ const emmitState = (results, socket) => {
 }
 
 const isValidString = (str, socket) => {
-  if (typeof(str) === 'string' && isAscii(str)) {
+  if (typeof(str) === 'string') {
     return true
   }
   return emitError({ message:'Invalid string'}, socket)
 }
 
 const isValidId = (id, socket) => {
-  if (typeof(id) === 'string' && isMongoId(id)) {
+  if (typeof(id) === 'number') {
     return true
   }
   return emitError({ message:'Invalid document id'}, socket)
 }
 
 
-const andErrorOrResults = socket => (err, results) => {
+const errorOrResults = socket => (err, results) => {
   if (err) return emitError(err, socket)
   return emmitState(results, socket)
 }
@@ -36,5 +32,7 @@ const andErrorOrResults = socket => (err, results) => {
 module.exports = {
   isValidId,
   isValidString,
-  andErrorOrResults
+  errorOrResults,
+  emmitState,
+  emitError
 }

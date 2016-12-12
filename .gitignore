@@ -39,8 +39,9 @@ jspm_packages
 # Config Files
 .config
 
-# Sound files
+# Files
 public/data
+server/database.json
 
 # Bundle Files
 public/bundle.js

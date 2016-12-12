@@ -11,7 +11,7 @@ const SearchBar = (props) => (
         floatingLabelText='Search'
         fullWidth={true}
         value={props.searchTerm}
-        onChange={props.handleChange(props.searchType)}
+        onChange={props.handleChange}
       />
     </CardText>
     {props.searchTerm &&
@@ -27,7 +27,6 @@ const SearchBar = (props) => (
 
 SearchBar.propTypes = {
   searchTerm: PropTypes.string.isRequired,
-  searchType: PropTypes.number.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleClear: PropTypes.func.isRequired
 }

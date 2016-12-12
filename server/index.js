@@ -23,9 +23,6 @@ app.get('/', (req, res) => {
 //           Socket Actions
 ///////////////////////////////////////////////////////////////////
 io.on('connection', socket => {
-  // Connection
-  socket.emit('connected', { hello: 'world' })
-
   // Add data
   socket.on('add', obj => {
     db.add(obj, socket)
@@ -44,11 +41,5 @@ io.on('connection', socket => {
   // Search for data
   socket.on('search', searchTerm => {
     db.search(searchTerm, socket)
-  })
-  socket.on('searchByType', ({ searchTerm, type }) => {
-    db.searchByType(searchTerm, type, socket)
-  })
-  socket.on('searchbyAuthor', ({ searchTerm, author }) => {
-    db.searchbyAuthor(searchTerm, author, socket)
   })
 })

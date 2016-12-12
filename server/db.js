@@ -1,80 +1,63 @@
-var mongoose = require('mongoose')
-const Sound = require('./models').Sound
+const ftls = require('./ftsl')
+const uniqBy = require('lodash.uniqby')
 const settings = require('../.config/settings')
 const {
-  isValidId, isValidString, andErrorOrResults
+  isValidId, isValidString, errorOrResults, emmitState, emitError
 } = require('./helpers')
 
 
-mongoose.Promise = global.Promise
-mongoose.connect(settings.database)
-
-const _find = (query, socket) => {
-  Sound
-  .find(query)
-  .limit(32)
-  .exec(andErrorOrResults(socket))
+const db_file = 'server/database.json'
+let database
+try {
+  database = ftls.load(db_file)
+} catch (e) {
+  console.error('Error loading database file:', e)
 }
 
-const _searchQuery = searchTerm => ({
-  $text: { $search: searchTerm.toLowerCase() }
-})
-
+const save = (socket, obj) => {
+  try {
+    const state = database.save(db_file, obj)
+    emmitState(state, socket)
+    return true
+  } catch (e) {
+    emmitError(e, socket)
+    return false
+  }
+}
 const add = (obj, socket) => {
-  var sound = new Sound(obj)
-  sound.save(andErrorOrResults(socket))
+  var sound = Object.assign({}, obj)
+  sound.id = database.add(sound)
+  return true
+  //return save(socket, sound)
 }
 
 const remove = (id, socket) => {
   if (isValidId(id, socket)) {
-    Sound.remove({ id: id }, andErrorOrResults(socket))
+    database.remove(id)
+    return save(socket)
   }
+  return false
 }
 
 const update = (obj, socket) => {
-  var sound = new Sound(obj)
-  if (isValidId(sound._id, socket)) {
-    Sound.findOneAndUpdate(
-      { id: sound._id }, sound,
-      andErrorOrResults(socket)
-    )
+  if (isValidId(obj.id, socket)) {
+    if (remove(obj.id, socket)) {
+      return add(obj, socket)
+    }
   }
 }
 
 const search = (searchTerm, socket) => {
   if (isValidString(searchTerm, socket)) {
-    _find(_searchQuery(searchTerm), socket)
+    emmitState(uniqBy(database.search(searchTerm), 'url').slice(0,64), socket)
   }
 }
 
-const lookup = (id, socket) => {
-  if (isValidId(id, socket)) {
-    _find({ id: id }, socket)
-  }
-}
-
-const searchByType = (searchTerm, type, socket) => {
-  if (isValidString(type, socket)) {
-    var query = _searchQuery(searchTerm)
-    query.type = type
-    _find(query, socket)
-  }
-}
-
-const searchByAuthor = (author, socket) => {
-  if (isValidString(author, socket)) {
-    var query = _searchQuery(searchTerm)
-    query.author = author
-    _find(query, socket)
-  }
-}
 
 module.exports = {
   add,
   remove,
   update,
   search,
-  lookup,
-  searchByType,
-  searchByAuthor
+  save
 }

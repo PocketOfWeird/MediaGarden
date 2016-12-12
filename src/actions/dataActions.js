@@ -1,6 +1,3 @@
-import { raiseError } from './errorActions'
-
-
 export const SERVER_STATE = 'SERVER_STATE'
 export const SERVER_SEARCH = 'SERVER_SEARCH'
 export const CLEAR_DATA = 'CLEAR_DATA'
@@ -10,19 +7,10 @@ export const serverState = state => ({
   payload: state
 })
 
-export const serverSearch = (
-  searchTerm, byType=false, type='', byAuthor=false, author=''
-) => {
-  if (typeof(searchTerm) !== 'string') {
-    return raiseError({message: 'Invalid Search term'})
-  }
-  return {
+export const serverSearch = (searchTerm) => ({
     type: SERVER_SEARCH,
-    payload: searchTerm,
-    meta: byType ? { by: 'type', type: type} : false ||
-          byAuthor ? { by: 'author', author: author } : false
-  }
-}
+    payload: searchTerm
+})
 
 export const clearData = () => ({
   type: CLEAR_DATA

@@ -20,3 +20,5 @@ export const filterResults = createSelector(
     }
   }
 )
+
+export const selectSearchType = state => state.searchFilter.searchType ? state.searchFilter.searchType === 2 ? 'MUSIC':'':'SFX'
