@@ -27,7 +27,7 @@ const Results = (props) => (
               src={result.url}
               autoPlay
             />
-            <p style={styles.p}>Author: {result.author}</p>
+            {result.author && <p style={styles.p}>Author: {result.author}</p>}
           </div>
         </CardText>
         <CardText>
