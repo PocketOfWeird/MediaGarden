@@ -18,7 +18,9 @@ const AppTitleBar = (props) => (
         handleAddTap={props.handleAddTap}
         handleBack={props.handleBack}
       />
-      : <Login />
+      : <Login
+          handleLogin={props.handleLogin}
+        />
     }
   />
 )

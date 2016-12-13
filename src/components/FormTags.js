@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import TextField from 'material-ui/TextField'
-import AutoComplete from 'material-ui/AutoComplete'
 import { formTagMap } from '../helpers'
 
 
@@ -14,17 +13,6 @@ const FormTags = (props) => (
         fullWidth={true}
         errorText={props.error}
         onKeyDown={props.handleChange}
-      />
-    }
-    {props.enhanced &&
-      <AutoComplete
-        name={props.name}
-        hintText={'Add ' + props.label}
-        floatingLabelText={props.label}
-        fullWidth={true}
-        errorText={props.error}
-        filter={AutoComplete.caseInsensitiveFilter}
-        dataSource={props.dataSource}
       />
     }
     <div style={styles}>
@@ -48,8 +36,7 @@ FormTags.propTypes = {
   tags: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleTagDelete: PropTypes.func.isRequired,
-  customColor: PropTypes.func,
-  enhanced: PropTypes.bool
+  customColor: PropTypes.func
 }
 
 export default FormTags

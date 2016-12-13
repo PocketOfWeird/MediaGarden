@@ -12,7 +12,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleAddTap: e => dispatch(setCurrentView(['add'])),
-  handleBack: e => dispatch(goBackward())
+  handleBack: e => dispatch(goBackward()),
+  handleLogin: e => {
+    window.location = '/login'
+  }
 })
 
 export default connect(

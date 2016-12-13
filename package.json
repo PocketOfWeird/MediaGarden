@@ -1,10 +1,10 @@
 {
-  "name": "geargoober",
+  "name": "media-garden",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple slick sound search",
   "main": "src/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/eslint src/** && SET NODE_ENV=production && browserify src/index.js -o public/bundle.js -t babelify && uglifyjs public/bundle.js --output public/bundle.min.js --compress --screw-ie8",
+    "build": "./node_modules/.bin/eslint src/** && browserify src/index.js -o public/bundle.js -t babelify && uglifyjs public/bundle.js --output public/bundle.min.js --compress --screw-ie8",
     "watch": "watchify src/index.js -o public/bundle.js -t babelify -v",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "npm run test -- --watch --recursive"
@@ -20,32 +20,26 @@
   },
   "homepage": "https://github.com/PocketOfWeird/MediaGarden#readme",
   "dependencies": {
-    "JSONStream": "^1.2.1",
-    "bfj": "^2.1.0",
-    "copy-to-clipboard": "^3.0.5",
     "express": "^4.14.0",
     "jsonio": "^1.0.1",
     "lodash.map": "^4.6.0",
     "lodash.uniqby": "^4.7.0",
     "material-ui": "^0.16.0",
     "merge": "^1.2.0",
-    "mongoose": "^4.7.2",
     "react": "^15.3.1",
     "react-audio-player": "^0.3.0",
     "react-dom": "^15.3.1",
     "react-dropzone": "^3.7.3",
-    "react-file-input": "^0.2.5",
     "react-redux": "^4.4.5",
     "react-tap-event-plugin": "^2.0.1",
     "read-json-sync": "^1.1.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
-    "socket.io": "^1.7.1",
-    "swipe-js-iso": "^2.0.3",
-    "validator": "^6.1.0"
+    "socket.io": "^1.7.1"
   },
   "devDependencies": {
+    "JSONStream": "^1.2.1",
     "babel-core": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-polyfill": "^6.13.0",

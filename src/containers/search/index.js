@@ -4,7 +4,7 @@ import FilterBarContainer from './FilterBarContainer'
 import ResultsContainer from './ResultsContainer'
 
 
-const SearchViewContainer = ({}) => (
+const SearchViewContainer = () => (
   <div>
     <SearchBarContainer />
     <FilterBarContainer />

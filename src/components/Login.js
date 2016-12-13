@@ -1,22 +1,27 @@
 import React, { PropTypes } from 'react'
-import { Card, CardActions, CardText} from 'material-ui/Card'
-import Logo from './Logo'
+import IconMenu from 'material-ui/IconMenu'
+import IconButton from 'material-ui/IconButton'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import MenuItem from 'material-ui/MenuItem'
 
-const Login = (FormFieldsContainer, FormActionContainer) => () => (
-  <div>
-    <Logo title="Gear Goober" subtitle="Login" />
-    <Card>
-      <CardText>
-        <FormFieldsContainer>
-          <div name='email' label='Email' />
-          <div name='password' label='Password' />
-        </FormFieldsContainer>
-      </CardText>
-      <CardActions>
-        <FormActionContainer label='Login' />
-      </CardActions>
-    </Card>
-  </div>
+
+const Login = (props) => (
+  <IconMenu
+    iconButtonElement={
+      <IconButton><MoreVertIcon /></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+  >
+    <MenuItem
+      primaryText="MJF Instructor Login"
+      onTouchTap={props.handleLogin}
+    />
+  </IconMenu>
 )
+
+Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired
+}
 
 export default Login
