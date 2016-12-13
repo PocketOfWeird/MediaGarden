@@ -1,4 +1,4 @@
-import { serverState, raiseNote } from '../actions'
+import { serverState, raiseNote, raiseError } from '../actions'
 import socket from '../db'
 
 
@@ -11,6 +11,7 @@ const on = store => next => action => {
       store.dispatch(serverState(addedArr))
     })
     socket.on('removed', addedArr => store.dispatch(raiseNote('Removed sound')))
+    socket.on('error', err => store.dispatch(raiseError(err)))
   }
   return next(action)
 }
