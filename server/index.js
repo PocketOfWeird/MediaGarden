@@ -2,7 +2,8 @@ var express = require('express')
 var app = express()
 var server = require('http').Server(app)
 var io = require('socket.io')(server)
-var db = require('./db')
+const db = require('./db')
+const { uploadFile } = require('./helpers')
 
 
 ///////////////////////////////////////////////////////////////////
@@ -41,5 +42,10 @@ io.on('connection', socket => {
   // Search for data
   socket.on('search', searchTerm => {
     db.search(searchTerm, socket)
+  })
+
+  // Upload Sound File
+  socket.on('uploadFile', ({file, name}) => {
+    uploadFile(file, name, socket)
   })
 })

@@ -6,14 +6,14 @@ import FormTags from '../../components/FormTags'
 
 const makeMapStateToProps = name => state => ({
   error: state.form.errors[name] || '',
-  tags: state.form.values[name] || {}
+  tags: state.form.values[name] || []
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleChange: defaultTagState => e => {
+  handleChange: e => {
     if (e.key === ' ' || e.key === 'Enter') {
       if (e.target.value.trim().length > 0 ) {
-        dispatch(formTagAdd(e, defaultTagState))
+        dispatch(formTagAdd(e))
         e.target.value = ''
       }
     }

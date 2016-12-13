@@ -1,5 +1,5 @@
-export const setE = value => ({
-  target: { value }
+export const setE = (value, name) => ({
+  target: { value, name }
 })
 
 

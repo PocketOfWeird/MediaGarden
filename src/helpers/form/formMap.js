@@ -23,16 +23,13 @@ export const formSelectMap = (collection,
 }
 
 export const formTagMap = (collection, parentName,
-  handleTagDelete, customColor=null,
-  id='id', name='name', enhanced=false) => {
-  return map(collection, tag =>
+  handleTagDelete, customColor=null) => {
+  return map(collection, (tag, key) =>
     <FormTag
-      key={tag[id]}
-      label={tag[name]}
-      onRequestDelete={handleTagDelete(parentName, tag[id])}
+      key={key}
+      label={tag}
+      onRequestDelete={handleTagDelete(parentName, tag)}
       color={customColor !== null ? customColor(tag) : ''}
-      enhanced={enhanced}
-      qytValue={tag.qyt}
     />
   )
 }

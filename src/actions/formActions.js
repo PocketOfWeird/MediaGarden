@@ -51,6 +51,5 @@ export const submitForm = (
   if (!isEmptyObject(formErrors)) {
     return dispatch(formError(formErrors))
   }
-  dispatch(formReset())
   return dispatch(callback(values))
 }

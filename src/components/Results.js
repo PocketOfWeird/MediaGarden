@@ -21,7 +21,11 @@ const Results = (props) => (
           showExpandableButton={true}
         />
         <CardText expandable={true}>
-          <div>Media Player</div>
+          <div>
+            Media Player
+            Length: {result.length}
+            Author: {result.author}
+          </div>
         </CardText>
         <CardText>
           <RaisedButton

@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import SearchViewContainer from '../search'
+import AddContainer from '../forms/AddContainer'
 
 
 const ViewsContainer = ({ view }) => (
   <div style={styles}>
     {view[0] === 'search' &&
-      <SearchViewContainer view={view.slice(1)} />
+      <SearchViewContainer />
+    }
+    {view[0] === 'add' &&
+      <AddContainer />
     }
   </div>
 )

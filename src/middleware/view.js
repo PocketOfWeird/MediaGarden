@@ -6,7 +6,7 @@ import { needsData, getDataAction } from '../helpers'
 const view = store => next => action => {
   if (action.type === SET_CURRENT_VIEW) {
 
-    const view = action.payload.current
+    const view = action.payload
 
     if (view[0] === 'register') {
       const tennant = view[1]

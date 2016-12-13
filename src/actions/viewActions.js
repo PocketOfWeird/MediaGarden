@@ -5,12 +5,12 @@ export const CLEAR_URL = 'CLEAR_URL'
 
 export const setCurrentView = view => ({
   type: SET_CURRENT_VIEW,
-  payload: { current: view }
+  payload: view
 })
 
 export const setDefaultView = () => ({
   type: SET_CURRENT_VIEW,
-  payload: { current: ['equipment', 'search'] }
+  payload: ['search']
 })
 
 export const goBackward = () => ({

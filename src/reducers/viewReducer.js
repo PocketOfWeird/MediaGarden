@@ -10,15 +10,25 @@ const defaultState = {
 const view = (state = defaultState, action) => {
   switch (action.type) {
     case SET_CURRENT_VIEW:
-      return Object.assign({}, state, action.payload)
+      return {
+        ...state,
+        past: [...state.past, state.current],
+        current: action.payload
+      }
     case GO_BACKWARD:
-      return state.set('future', state.get('future').push(state.get('current')))
-                  .set('current', state.get('past').peek())
-                  .set('past', state.get('past').pop())
+      return {
+        ...state,
+        future: [...state.future, state.current],
+        current: state.past[state.past.length - 1],
+        past: [...state.past.slice(0, state.past.length - 1)]
+      }
     case GO_FORWARD:
-      return state.set('past', state.get('past').push(state.get('current')))
-                  .set('current', state.get('future').peek())
-                  .set('future', state.get('future').pop())
+      return {
+        ...state,
+        past: [...state.past, state.current],
+        current: state.future[state.future.length - 1],
+        future: [state.future.slice(0, state.future.length - 1)]
+      }
     default:
       return state
   }

@@ -1,34 +1,39 @@
 import React, { PropTypes } from 'react'
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar'
+import AppBar from 'material-ui/AppBar'
 import { yellowA400 } from 'material-ui/styles/colors'
-import Badge from 'material-ui/Badge'
-import IconButton from 'material-ui/IconButton'
-import CartIcon from 'material-ui/svg-icons/action/shopping-cart'
-import AddCircle from 'material-ui/svg-icons/content/add-circle'
+import Logged from './Logged'
+import Login from './Login'
 
 
 const AppTitleBar = (props) => (
-  <Toolbar style={styles}>
-    <ToolbarTitle text={props.title} />
-    {props.logged &&
-      <IconButton
-        tooltip='Add Sounds'
-        onTouchTap={props.handleAddTap}
-      >
-        <AddCircle />
-      </IconButton>
+  <AppBar
+    title={props.title}
+    showMenuIconButton={false}
+    style={styles.bar}
+    titleStyle={styles.title}
+    iconElementRight={
+      props.logged ?
+      <Logged
+        currentView={props.currentView}
+        handleAddTap={props.handleAddTap}
+        handleBack={props.handleBack}
+      />
+      : <Login />
     }
-  </Toolbar>
+  />
 )
 
 let styles={
-  backgroundColor: yellowA400
+  bar: { backgroundColor: yellowA400 },
+  title: { color: '#000' }
 }
 
 AppTitleBar.propTypes = {
   logged: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  handleAddTap: PropTypes.func.isRequired
+  currentView: PropTypes.array.isRequired,
+  handleAddTap: PropTypes.func.isRequired,
+  handleBack: PropTypes.func.isRequired
 }
 
 export default AppTitleBar

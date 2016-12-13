@@ -2,7 +2,7 @@ const ftls = require('./ftsl')
 const uniqBy = require('lodash.uniqby')
 const settings = require('../.config/settings')
 const {
-  isValidId, isValidString, emmitState, emitError
+  isValidId, isValidString, emitState, emitError, emitAdded, emitRemoved
 } = require('./helpers')
 
 
@@ -14,21 +14,21 @@ try {
   console.error('Error loading database file:', e)
 }
 
-const save = (socket, obj) => {
+const save = (socket, added) => {
   try {
-    const state = database.save(db_file, obj)
-    emmitState(state, socket)
+    const addedSound = database.save(db_file, added)
+    if (addedSound) emitAdded(addedSound, socket)
+    else emitRemoved(socket)
     return true
   } catch (e) {
-    emmitError(e, socket)
+    emitError(e, socket)
     return false
   }
 }
 const add = (obj, socket) => {
   var sound = Object.assign({}, obj)
   sound.id = database.add(sound)
-  return true
-  //return save(socket, sound)
+  return save(socket, sound)
 }
 
 const remove = (id, socket) => {
@@ -49,7 +49,7 @@ const update = (obj, socket) => {
 
 const search = (searchTerm, socket) => {
   if (isValidString(searchTerm, socket)) {
-    emmitState(uniqBy(database.search(searchTerm), 'url').slice(0,64), socket)
+    emitState(uniqBy(database.search(searchTerm), 'url').slice(0,64), socket)
   }
 }
 

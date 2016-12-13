@@ -13,7 +13,7 @@ const FormTags = (props) => (
         floatingLabelText={props.label}
         fullWidth={true}
         errorText={props.error}
-        onKeyDown={props.handleChange(props.defaultTagState)}
+        onKeyDown={props.handleChange}
       />
     }
     {props.enhanced &&
@@ -29,8 +29,7 @@ const FormTags = (props) => (
     }
     <div style={styles}>
       {formTagMap(props.tags, props.name,
-        props.handleTagDelete, props.customColor,
-        props.tagId, props.tagName, props.enhanced
+        props.handleTagDelete, props.customColor
       )}
     </div>
   </div>
@@ -46,10 +45,9 @@ FormTags.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
-  tags: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleTagDelete: PropTypes.func.isRequired,
-  defaultTagState: PropTypes.object,
   customColor: PropTypes.func,
   enhanced: PropTypes.bool
 }
