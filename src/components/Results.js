@@ -4,6 +4,7 @@ import { yellowA400 } from 'material-ui/styles/colors'
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import Chip from 'material-ui/Chip'
+import AudioPlayer from 'react-audio-player'
 import Loader from './Loader'
 
 
@@ -21,10 +22,12 @@ const Results = (props) => (
           showExpandableButton={true}
         />
         <CardText expandable={true}>
-          <div>
-            Media Player
-            Length: {result.length}
-            Author: {result.author}
+          <div style={styles.player}>
+            <AudioPlayer
+              src={result.url}
+              autoPlay
+            />
+            <p style={styles.p}>Author: {result.author}</p>
           </div>
         </CardText>
         <CardText>
@@ -50,6 +53,16 @@ const Results = (props) => (
   </div>
 )
 
+let styles = {
+  p: {
+    width: '100%'
+  },
+  player: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginBottom: 14
+  }
+}
 
 Results.propTypes = {
   loading: PropTypes.bool.isRequired,
