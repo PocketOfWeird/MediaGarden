@@ -5,6 +5,8 @@ import localStore from './local'
 import on from './on'
 import search from './search'
 import add from './add'
+import update from './update'
+import remove from './remove'
 import url from './url'
 import view from './view'
 
@@ -18,6 +20,8 @@ const configureMiddleware = () => {
     on,
     search,
     add,
+    update,
+    remove,
     url,
     view,
     logger

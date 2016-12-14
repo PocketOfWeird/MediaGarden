@@ -1,6 +1,6 @@
 import { FORM_VALUE_CHANGE, FORM_VALUE_VALIDATE,
   FORM_ERROR, FORM_RESET, FORM_TAG_CHANGE, FORM_TAG_REMOVE,
-  SERVER_STATE } from '../actions'
+  SERVER_STATE, SET_UPDATE_DATA } from '../actions'
 import formTag from './formTagReducer'
 
 
@@ -35,6 +35,11 @@ const form = (state = defaultState, action) => {
     case FORM_RESET:
     case SERVER_STATE:
       return defaultState
+    case SET_UPDATE_DATA:
+      return {
+        ...defaultState,
+        values: action.payload
+      }
     default:
       return state
   }

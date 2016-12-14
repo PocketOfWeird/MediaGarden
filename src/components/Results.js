@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Chip from 'material-ui/Chip'
 import AudioPlayer from 'react-audio-player'
 import Loader from './Loader'
+import UpdateContainer from '../containers/forms/UpdateContainer'
 
 
 const Results = (props) => (
@@ -51,6 +52,14 @@ const Results = (props) => (
             </div>
           }
         </CardText>
+        {props.logged &&
+          <CardActions>
+            <RaisedButton
+              label='Update'
+              onTouchTap={props.handleTapUpdate(result)}
+            />
+          </CardActions>
+        }
       </Card>
     )}
     {props.loading && <Loader />}
@@ -71,8 +80,10 @@ let styles = {
 Results.propTypes = {
   loading: PropTypes.bool.isRequired,
   resultsList: PropTypes.array.isRequired,
+  logged: PropTypes.bool.isRequired,
   handleDownload: PropTypes.func.isRequired,
-  handleKeyword: PropTypes.func.isRequired
+  handleKeyword: PropTypes.func.isRequired,
+  handleTapUpdate: PropTypes.func.isRequired
 }
 
 export default Results

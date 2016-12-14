@@ -1,3 +1,7 @@
+import { isEmptyObject } from '../helpers'
+import { setPrompt, clearPrompt } from './promptActions'
+
+
 export const SET_CURRENT_VIEW = 'SET_CURRENT_VIEW'
 export const GO_BACKWARD = 'GO_BACKWARD'
 export const GO_FORWARD = 'GO_FORWARD'
@@ -13,9 +17,19 @@ export const setDefaultView = () => ({
   payload: ['search']
 })
 
-export const goBackward = () => ({
-  type: GO_BACKWARD
-})
+export const goBackward = () => (dispatch, getState) => {
+  if (!isEmptyObject(getState().form.values)) {
+    return dispatch(setPrompt({
+      question: 'Are you sure you want to leave without saving?',
+      yesAction: () => {
+        dispatch(clearPrompt())
+        dispatch({ type: GO_BACKWARD })
+      },
+      noAction: () => dispatch(clearPrompt())
+    }))
+  }
+  return dispatch({ type: GO_BACKWARD })
+}
 
 export const goForward = () => ({
   type: GO_FORWARD

@@ -13,7 +13,7 @@ const FormFile = (props) => (
     </Dropzone>
     {props.values[props.name] &&
       <p>File: {
-        props.values[props.name].name
+        props.values[props.name].name || props.values[props.name]
       }</p>
     }
   </div>

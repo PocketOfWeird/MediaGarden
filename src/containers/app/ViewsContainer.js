@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import SearchViewContainer from '../search'
 import AddContainer from '../forms/AddContainer'
+import UpdateContainer from '../forms/UpdateContainer'
 
 
 const ViewsContainer = ({ view }) => (
@@ -11,6 +12,9 @@ const ViewsContainer = ({ view }) => (
     }
     {view[0] === 'add' &&
       <AddContainer />
+    }
+    {view[0] === 'update' &&
+      <UpdateContainer />
     }
   </div>
 )

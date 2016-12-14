@@ -13,7 +13,7 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    {props.currentView[0] === 'add' ?
+    {props.currentView[0] === 'add' || props.currentView[0] === 'update' ?
       <MenuItem
         primaryText='Go Back'
         onTouchTap={props.handleBack}

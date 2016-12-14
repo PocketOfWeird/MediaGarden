@@ -8,6 +8,7 @@ import view from './viewReducer'
 import searchTerm from './searchTermReducer'
 import searchFilter from './searchFilterReducer'
 import token from './tokenReducer'
+import prompt from './promptReducer'
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   searchTerm,
   searchFilter,
   token,
+  prompt,
   view
 })
 

@@ -52,7 +52,7 @@ const update = (userInfo, obj, socket) => {
 
 const search = (searchTerm, socket) => {
   if (isValidString(searchTerm, socket)) {
-    emitState(uniqBy(database.search(searchTerm), 'url').slice(0,64), socket)
+    emitState(uniqBy(database.search(searchTerm), 'url').slice(0,32), socket)
   }
 }
 
