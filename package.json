@@ -22,9 +22,11 @@
   "dependencies": {
     "express": "^4.14.0",
     "jsonio": "^1.0.1",
+    "jsonwebtoken": "^7.2.1",
     "lodash.uniqby": "^4.7.0",
     "merge": "^1.2.0",
     "read-json-sync": "^1.1.1",
+    "simple-cas-interface": "^0.2.1",
     "socket.io": "^1.7.1"
   },
   "devDependencies": {

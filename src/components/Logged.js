@@ -24,7 +24,8 @@ const Logged = (props) => (
         />
     }
     <MenuItem
-      primaryText="Sign out"
+      primaryText="Logout"
+      onTouchTap={props.handleLogout}
     />
   </IconMenu>
 )
@@ -32,7 +33,8 @@ const Logged = (props) => (
 Logged.propTypes = {
   currentView: PropTypes.array.isRequired,
   handleAddTap: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired
+  handleBack: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired
 }
 
 export default Logged

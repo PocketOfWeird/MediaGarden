@@ -1,15 +1,18 @@
+const settings = require('../.config/settings')
 var express = require('express')
 var app = express()
 var server = require('http').Server(app)
-var io = require('socket.io')(server)
+var io = require('socket.io')(server, settings.socket_opts)
+const { auth } = require('./auth')
 const db = require('./db')
-const { uploadFile } = require('./helpers')
+const { uploadFile, proceedIfValid } = require('./helpers')
 
 
 ///////////////////////////////////////////////////////////////////
 //           Init Server
 ///////////////////////////////////////////////////////////////////
 app.use(express.static('public'))
+auth(app)
 server.listen(80)
 console.log('Server listening on port 80')
 
@@ -18,25 +21,25 @@ console.log('Server listening on port 80')
 ///////////////////////////////////////////////////////////////////
 app.get('/', (req, res) => {
   res.sendfile(__dirname + '/index.html')
-});
+})
 
 ///////////////////////////////////////////////////////////////////
 //           Socket Actions
 ///////////////////////////////////////////////////////////////////
 io.on('connection', socket => {
   // Add data
-  socket.on('add', obj => {
-    db.add(obj, socket)
+  socket.on('add', ({ sound, token }) => {
+    proceedIfValid(token, socket, user => db.add(user, sound, socket))
   })
 
   // Remove data
-  socket.on('remove', id => {
-    db.remove(id, socket)
+  socket.on('remove', ({ id, token }) => {
+    proceedIfValid(token, socket, user => db.remove(user, id, socket))
   })
 
   // Update data
-  socket.on('update', obj => {
-    db.update(obj, socket)
+  socket.on('update', ({ sound, token }) => {
+    proceedIfValid(token, socket, user => db.update(user, sound, socket))
   })
 
   // Search for data
@@ -45,7 +48,7 @@ io.on('connection', socket => {
   })
 
   // Upload Sound File
-  socket.on('uploadFile', ({file, name}) => {
-    uploadFile(file, name, socket)
+  socket.on('uploadFile', ({ file, name, token }) => {
+    proceedIfValid(token, socket, user => uploadFile(user, file, name, socket))
   })
 })

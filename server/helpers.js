@@ -1,10 +1,14 @@
 const fs = require('fs')
-
+const jwt = require('jsonwebtoken')
+const settings = require('../.config/settings')
+const { authorizedUser } = require('./auth')
 
 const emitError = (errObject, socket) => {
   socket.emit('error', errObject)
   return false
 }
+
+const emitUnauthorized = socket => emitError({ message: 'Unauthorized request' }, socket)
 
 const emitState = (results, socket) => {
   const resultsArray = Array.isArray(results) ? results : [ results ]
@@ -37,14 +41,25 @@ const isValidId = (id, socket) => {
   return emitError({ message:'Invalid document id'}, socket)
 }
 
-const uploadFile = (file, name, socket) => {
-  const path = __dirname + '/../public/data/uploads/' + name
-  const relativePath = '/data/uploads/' + name
-  fs.writeFile(path, file, err => {
-    if (err) emitError(err, socket)
-    else {
-      socket.emit('fileUploaded', relativePath)
-    }
+const uploadFile = (user, file, name, socket) => {
+  if (authorizedUser(user)) {
+    const path = __dirname + '/../public' + settings.data + name
+    const relativePath = settings.data + name
+    fs.writeFile(path, file, err => {
+      if (err) emitError(err, socket)
+      else {
+        socket.emit('fileUploaded', relativePath)
+      }
+    })
+  } else {
+    emitUnauthorized(socket)
+  }
+}
+
+const proceedIfValid = (token, socket, callback) => {
+  jwt.verify(token, settings.secret, (err, decoded) => {
+    if (err) return emitUnauthorized(socket)
+    callback(decoded)
   })
 }
 
@@ -55,5 +70,6 @@ module.exports = {
   emitError,
   emitAdded,
   emitRemoved,
-  uploadFile
+  uploadFile,
+  proceedIfValid
 }

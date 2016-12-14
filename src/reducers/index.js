@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import user from './userReducer'
 import data from './dataReducer'
 import error from './errorReducer'
 import form from './formReducer'
@@ -8,6 +7,7 @@ import note from './noteReducer'
 import view from './viewReducer'
 import searchTerm from './searchTermReducer'
 import searchFilter from './searchFilterReducer'
+import token from './tokenReducer'
 
 
 const rootReducer = combineReducers({
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   note,
   searchTerm,
   searchFilter,
-  user,
+  token,
   view
 })
 
