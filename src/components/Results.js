@@ -35,17 +35,21 @@ const Results = (props) => (
             label='Download'
             onTouchTap={props.handleDownload(result.url)}
           />
-          <h5>Keywords</h5>
-          {map(result.keywords, (keyword, index) =>
-            <Chip
-              key={index}
-              backgroundColor={yellowA400}
-              style={{margin: 1}}
-              onTouchTap={props.handleKeyword(keyword)}
-            >
-              {keyword}
-            </Chip>
-          )}
+          {result.keywords.length > 0 &&
+            <div>
+              <h5>Keywords</h5>
+              {map(result.keywords, (keyword, index) =>
+                <Chip
+                  key={index}
+                  backgroundColor={yellowA400}
+                  style={{margin: 1}}
+                  onTouchTap={props.handleKeyword(keyword)}
+                >
+                  {keyword}
+                </Chip>
+              )}
+            </div>
+          }
         </CardText>
       </Card>
     )}
