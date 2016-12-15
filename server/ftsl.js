@@ -365,7 +365,6 @@ FullTextSearchLight.prototype.remove = function (data_index) {
 
 
 FullTextSearchLight.prototype.removePrimitve = function (text, data_index) {
-
     // 1) Search directly for the result
     if (text.length <= this.config.index_amount) {
         var index_nr = text.length - 1;
@@ -376,7 +375,7 @@ FullTextSearchLight.prototype.removePrimitve = function (text, data_index) {
         this.removeFromArray(ids, data_index);
 
         // Is empty can be deleted, no further need
-        if (ids.length == 0) {
+        if (ids && ids.length == 0) {
             delete this.indexes[index_nr][text];
         }
 
@@ -404,11 +403,13 @@ FullTextSearchLight.prototype.removePrimitve = function (text, data_index) {
 };
 
 FullTextSearchLight.prototype.removeFromArray = function (arr, val) {
-    for (var i = arr.length - 1; i > -1; i--) {
+    if (arr) {
+      for (var i = arr.length - 1; i > -1; i--) {
         if (arr[i] == val) {
             arr.splice(i, 1);
         }
     }
+  }
 };
 
 
