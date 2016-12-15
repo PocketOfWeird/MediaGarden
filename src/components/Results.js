@@ -40,16 +40,18 @@ const Results = (props) => (
           {result.keywords && result.keywords.length > 0 &&
             <div>
               <h5>Keywords</h5>
-              {map(result.keywords, (keyword, index) =>
-                <Chip
-                  key={index}
-                  backgroundColor={yellowA400}
-                  style={{margin: 1}}
-                  onTouchTap={props.handleKeyword(keyword)}
-                >
-                  {keyword}
-                </Chip>
-              )}
+              <div style={styles.keywords}>
+                {map(result.keywords, (keyword, index) =>
+                  <Chip
+                    key={index}
+                    backgroundColor={yellowA400}
+                    style={{margin: 1}}
+                    onTouchTap={props.handleKeyword(keyword)}
+                  >
+                    {keyword}
+                  </Chip>
+                )}
+              </div>
             </div>
           }
         </CardText>
@@ -75,6 +77,10 @@ let styles = {
     display: 'flex',
     flexWrap: 'wrap',
     marginBottom: 14
+  },
+  keywords: {
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 }
 
