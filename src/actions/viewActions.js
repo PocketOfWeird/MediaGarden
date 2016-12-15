@@ -1,5 +1,6 @@
 import { isEmptyObject } from '../helpers'
 import { setPrompt, clearPrompt } from './promptActions'
+import { formReset } from './formActions'
 
 
 export const SET_CURRENT_VIEW = 'SET_CURRENT_VIEW'
@@ -22,6 +23,7 @@ export const goBackward = () => (dispatch, getState) => {
     return dispatch(setPrompt({
       question: 'Are you sure you want to leave without saving?',
       yesAction: () => {
+        dispatch(formReset())
         dispatch(clearPrompt())
         return dispatch({ type: GO_BACKWARD })
       },
