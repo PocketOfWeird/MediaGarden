@@ -6,7 +6,7 @@ import NoteContainer from './NoteContainer'
 import PromptContainer from './PromptContainer'
 
 const App = () => (
-  <div>
+  <div style={styles}>
     <AppTitleBarContainer />
     <ViewsContainer />
     <PromptContainer />
@@ -14,5 +14,9 @@ const App = () => (
     <NoteContainer />
   </div>
 )
+
+let styles = {
+  maxWidth: 768
+}
 
 export default App
