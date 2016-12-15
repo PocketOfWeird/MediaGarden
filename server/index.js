@@ -13,8 +13,8 @@ const { uploadFile, proceedIfValid } = require('./helpers')
 ///////////////////////////////////////////////////////////////////
 app.use(express.static('public'))
 auth(app)
-server.listen(80)
-console.log('Server listening on port 80')
+server.listen(settings.port)
+console.log('Server listening on port', settings.port)
 
 ///////////////////////////////////////////////////////////////////
 //           Routes
