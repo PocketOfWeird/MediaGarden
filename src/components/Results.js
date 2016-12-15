@@ -11,8 +11,9 @@ import UpdateContainer from '../containers/forms/UpdateContainer'
 
 const Results = (props) => (
   <div>
-    {map(props.resultsList, (result, key) =>
-      <Card
+    {map(props.resultsList, (result, key) => {
+      if (result) {
+      return <Card
         key={key}
       >
         <CardHeader
@@ -61,7 +62,7 @@ const Results = (props) => (
           </CardActions>
         }
       </Card>
-    )}
+    }})}
     {props.loading && <Loader />}
   </div>
 )

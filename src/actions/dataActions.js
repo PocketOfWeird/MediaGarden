@@ -47,7 +47,7 @@ export const serverRemove = () => (dispatch, getState) => {
   }
   return dispatch({
     type: SERVER_REMOVE,
-    payload: values.id
+    payload: values
   })
 }
 

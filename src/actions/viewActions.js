@@ -23,7 +23,7 @@ export const goBackward = () => (dispatch, getState) => {
       question: 'Are you sure you want to leave without saving?',
       yesAction: () => {
         dispatch(clearPrompt())
-        dispatch({ type: GO_BACKWARD })
+        return dispatch({ type: GO_BACKWARD })
       },
       noAction: () => dispatch(clearPrompt())
     }))

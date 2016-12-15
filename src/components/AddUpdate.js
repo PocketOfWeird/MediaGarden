@@ -22,7 +22,6 @@ const AddUpdate = (FormFieldsContainer, FormSelectContainer,
           <div value='SFX' name='SFX' />
           <div value='MUSIC' name='MUSIC' />
         </FormSelectContainer>
-        <FormFileContainer name='url' label='Drop or choose a WAV File' />
         <FormTagsContainer
           name='keywords'
           label='Keywords'
@@ -31,6 +30,7 @@ const AddUpdate = (FormFieldsContainer, FormSelectContainer,
           <div name='author' label='Author' />
           <div name='length' label='Length' />
         </FormFieldsContainer>
+        <FormFileContainer name='url' label='Drop or choose a WAV File' />
       </CardText>
       <CardActions>
         <FormActionContainer label='Save' />
@@ -39,6 +39,7 @@ const AddUpdate = (FormFieldsContainer, FormSelectContainer,
             <Divider />
             <RaisedButton
               label='Delete'
+              disabled={props.loading}
               onTouchTap={props.handleDelete}
               style={{marginTop: 20}}
               labelColor={'#fff'}
