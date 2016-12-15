@@ -1,12 +1,13 @@
 const ftls = require('./ftsl')
 const uniqBy = require('lodash.uniqby')
+const { authorizedUser } = require('./auth')
 const settings = require('../.config/settings')
 const {
   isValidId, isValidString, emitState, emitError, emitAdded, emitRemoved
 } = require('./helpers')
 
 
-const db_file = 'server/database.json'
+const db_file = settings.databaseFile
 let database
 try {
   database = ftls.load(db_file)
@@ -25,31 +26,33 @@ const save = (socket, added) => {
     return false
   }
 }
-const add = (obj, socket) => {
+const add = (userInfo, obj, socket) => {
   var sound = Object.assign({}, obj)
   sound.id = database.add(sound)
+  sound.addedBy = userInfo.user
+  sound.addedOn = new Date(Date.now()).toDateString()
   return save(socket, sound)
 }
 
-const remove = (id, socket) => {
-  if (isValidId(id, socket)) {
+const remove = (userInfo, id, socket) => {
+  if (isValidId(id, socket) && authorizedUser(userInfo)) {
     database.remove(id)
     return save(socket)
   }
   return false
 }
 
-const update = (obj, socket) => {
+const update = (userInfo, obj, socket) => {
   if (isValidId(obj.id, socket)) {
-    if (remove(obj.id, socket)) {
-      return add(obj, socket)
+    if (remove(userInfo, obj.id, socket)) {
+      return add(userInfo, obj, socket)
     }
   }
 }
 
 const search = (searchTerm, socket) => {
   if (isValidString(searchTerm, socket)) {
-    emitState(uniqBy(database.search(searchTerm), 'url').slice(0,64), socket)
+    emitState(uniqBy(database.search(searchTerm), 'url').slice(0,32), socket)
   }
 }
 

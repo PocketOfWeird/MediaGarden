@@ -7,14 +7,13 @@ const FormFile = (props) => (
   <div>
     <Dropzone
       multiple={false}
-      accept={'audio/wav'}
       onDrop={props.handleChange(props.name)}
     >
       <div>{props.label}</div>
     </Dropzone>
     {props.values[props.name] &&
       <p>File: {
-        props.values[props.name].name
+        props.values[props.name].name || props.values[props.name]
       }</p>
     }
   </div>

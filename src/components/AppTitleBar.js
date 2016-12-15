@@ -17,8 +17,11 @@ const AppTitleBar = (props) => (
         currentView={props.currentView}
         handleAddTap={props.handleAddTap}
         handleBack={props.handleBack}
+        handleLogout={props.handleLogout}
       />
-      : <Login />
+      : <Login
+          handleLogin={props.handleLogin}
+        />
     }
   />
 )
@@ -33,7 +36,9 @@ AppTitleBar.propTypes = {
   title: PropTypes.string.isRequired,
   currentView: PropTypes.array.isRequired,
   handleAddTap: PropTypes.func.isRequired,
-  handleBack: PropTypes.func.isRequired
+  handleBack: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired
 }
 
 export default AppTitleBar

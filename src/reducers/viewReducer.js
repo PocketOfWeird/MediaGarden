@@ -16,12 +16,15 @@ const view = (state = defaultState, action) => {
         current: action.payload
       }
     case GO_BACKWARD:
-      return {
-        ...state,
-        future: [...state.future, state.current],
-        current: state.past[state.past.length - 1],
-        past: [...state.past.slice(0, state.past.length - 1)]
+      if (state.past.length > 0) {
+        return {
+          ...state,
+          future: [...state.future, state.current],
+          current: state.past[state.past.length - 1],
+          past: [...state.past.slice(0, state.past.length - 1)]
+        }
       }
+      return state
     case GO_FORWARD:
       return {
         ...state,

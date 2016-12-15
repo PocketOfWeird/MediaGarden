@@ -2,7 +2,7 @@ import React from 'react'
 import { yellowA400 } from 'material-ui/styles/colors'
 import Avatar from 'material-ui/Avatar'
 
-const Loader = ({}) => (
+const Loader = () => (
   <div style={styles}>
     <Avatar
       src="audio.svg"

@@ -1,14 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setSearch, clearSearch } from '../../actions'
-import { filterResults } from '../../selectors'
+import { setSearch, clearSearch, setUpdateData, setCurrentView } from '../../actions'
+import { filterResults, isLoggedIn } from '../../selectors'
 import { setE } from '../../helpers'
 import Results from '../../components/Results'
 
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  resultsList: filterResults(state)
+  resultsList: filterResults(state),
+  logged: isLoggedIn(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -16,6 +17,10 @@ const mapDispatchToProps = dispatch => ({
   handleKeyword: keyword => e => {
     dispatch(clearSearch())
     dispatch(setSearch(setE(keyword)))
+  },
+  handleTapUpdate: data => e => {
+    dispatch(setUpdateData(data))
+    dispatch(setCurrentView(['update']))
   }
 })
 
