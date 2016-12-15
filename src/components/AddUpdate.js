@@ -30,7 +30,9 @@ const AddUpdate = (FormFieldsContainer, FormSelectContainer,
           <div name='author' label='Author' />
           <div name='length' label='Length' />
         </FormFieldsContainer>
-        <FormFileContainer name='url' label='Drop or choose a WAV File' />
+        {!props.loading &&
+          <FormFileContainer name='url' label='Drop or choose a WAV File' />
+        }
       </CardText>
       <CardActions>
         <FormActionContainer label='Save' />
