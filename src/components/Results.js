@@ -33,10 +33,6 @@ const Results = (props) => (
           </div>
         </CardText>
         <CardText>
-          <RaisedButton
-            label='Download'
-            onTouchTap={props.handleDownload(result.url)}
-          />
           {result.keywords && result.keywords.length > 0 &&
             <div>
               <h5>Keywords</h5>
