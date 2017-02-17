@@ -4,14 +4,27 @@ import ViewsContainer from './ViewsContainer'
 import ErrorContainer from './ErrorContainer'
 import NoteContainer from './NoteContainer'
 import PromptContainer from './PromptContainer'
+import BrowserWarningContainer from './BrowserWarningContainer'
+import { getBrowser } from '../../helpers'
+
+
+const browser = getBrowser()
+const unSupportedBrowser = browser !== 'Chrome' && browser !== 'Firefox'
 
 const App = () => (
-  <div style={styles}>
-    <AppTitleBarContainer />
-    <ViewsContainer />
-    <PromptContainer />
-    <ErrorContainer />
-    <NoteContainer />
+  <div>
+    {unSupportedBrowser &&
+      <BrowserWarningContainer />
+    }
+    {!unSupportedBrowser &&
+      <div style={styles}>
+        <AppTitleBarContainer />
+        <ViewsContainer />
+        <PromptContainer />
+        <ErrorContainer />
+        <NoteContainer />
+      </div>
+    }
   </div>
 )
 
