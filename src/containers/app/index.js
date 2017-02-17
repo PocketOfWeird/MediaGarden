@@ -9,13 +9,14 @@ import { getBrowser } from '../../helpers'
 
 
 const browser = getBrowser()
+const unSupportedBrowser = browser !== 'Chrome' && browser !== 'Firefox'
 
 const App = () => (
   <div>
-    {browser === 'Microsoft Internet Explorer' &&
+    {unSupportedBrowser &&
       <BrowserWarningContainer />
     }
-    {browser !== 'Microsoft Internet Explorer' &&
+    {!unSupportedBrowser &&
       <div style={styles}>
         <AppTitleBarContainer />
         <ViewsContainer />

@@ -29,6 +29,10 @@ const Results = (props) => (
               src={result.url}
               autoPlay
             />
+            <RaisedButton
+              label='Download'
+              onTouchTap={props.handleDownload(result.url, result.name)}
+            />
             {result.author && <p style={styles.p}>Author: {result.author}</p>}
           </div>
         </CardText>

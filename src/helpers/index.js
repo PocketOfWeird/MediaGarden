@@ -1,3 +1,7 @@
+import FileSaver from 'file-saver'
+import bowser from 'bowser'
+
+
 export * from './form'
 export * from './data'
 export * from './token'
@@ -10,23 +14,17 @@ export const isEmptyObject = obj => {
 
 // Browser detector
 export const getBrowser = () => {
+  return bowser.name
+}
 
-  const navigator = window.navigator
-  const sUsrAg = navigator.userAgent
-  var sBrowser
-
-  if(sUsrAg.indexOf('Chrome') > -1) {
-      sBrowser = 'Google Chrome'
-  } else if (sUsrAg.indexOf('Safari') > -1) {
-      sBrowser = 'Apple Safari'
-  } else if (sUsrAg.indexOf('Opera') > -1) {
-      sBrowser = 'Opera'
-  } else if (sUsrAg.indexOf('Firefox') > -1) {
-      sBrowser = 'Mozilla Firefox'
-  } else if (sUsrAg.indexOf('MSIE') > -1) {
-      sBrowser = 'Microsoft Internet Explorer'
-  } else if (sUsrAg.indexOf('Trident/7.0') > -1) {
-      sBrowser = 'Microsoft Internet Explorer'
+export function download(url, name) {
+  var xhr = new XMLHttpRequest()
+  xhr.open('GET', url)
+  xhr.responseType = 'blob'//force the HTTP response, response-type header to be blob
+  xhr.onload = function()
+  {
+    const blob = xhr.response //xhr.response is now a blob object
+    FileSaver.saveAs(blob, name)
   }
-  return sBrowser
+  xhr.send()
 }
